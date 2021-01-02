@@ -10,7 +10,7 @@ import { initialReduxStartupScript } from './shared/infra/redux/startupScript';
 
 const store = configureStore();
 
-//@ts-ignore
+export type ApplicationStore = typeof store;
 initialReduxStartupScript(store);
 
 ReactDOM.render(

@@ -1,23 +1,19 @@
-
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunk from 'redux-thunk';
 import users from '../../../modules/users/redux/reducers';
 import forum from '../../../modules/forum/redux/reducers';
+import {
+  configureStore,
+  getDefaultMiddleware,
+  combineReducers
+} from '@reduxjs/toolkit';
 
-const reducers = {
-  users,
-  forum
-}
-
-export default function configureStore(initialState={}) {
- return createStore(
-    combineReducers({
-      ...reducers
+export default function setupStore(initialState = {}) {
+  return configureStore({
+    reducer: combineReducers({
+      users,
+      forum
     }),
-    initialState,
-    compose(
-      applyMiddleware(thunk),
-      (window as any).devToolsExtension ? (window as any).devToolsExtension() : (f: any) => f
-    )
- );
+    preloadedState: initialState,
+    middleware: getDefaultMiddleware({ thunk: true }),
+    devTools: process.env.NODE_ENV === 'development'
+  });
 }

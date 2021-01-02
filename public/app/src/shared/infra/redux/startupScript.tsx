@@ -1,11 +1,8 @@
-import { Store } from "redux"
-import { getUserProfile } from "../../../modules/users/redux/operators"
+import { ApplicationStore } from '../../..';
+import { getUserProfile } from '../../../modules/users/redux/operators';
 
-function initialReduxStartupScript (store: Store) : void {
-  //@ts-ignore
-  store.dispatch(getUserProfile(store.dispatch))
+function initialReduxStartupScript(store: ApplicationStore): void {
+  store.dispatch(getUserProfile());
 }
 
-export {
-  initialReduxStartupScript
-}
+export { initialReduxStartupScript };
